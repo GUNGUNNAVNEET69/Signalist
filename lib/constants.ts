@@ -1,7 +1,7 @@
 export const NAV_ITEMS = [
     { href: '/', label: 'Dashboard' },
     { href: '/search', label: 'Search' },
-    // { href: '/watchlist', label: 'Watchlist' },
+    { href: '/watchlist', label: 'Watchlist' },
 ];
 
 // Sign-up form select options
@@ -241,6 +241,25 @@ export const TECHNICAL_ANALYSIS_WIDGET_CONFIG = (symbol: string) => ({
     interval: '1h',
     largeChartUrl: '',
 });
+
+export const COUNTRIES = [
+  { label: "India 🇮🇳", value: "India" },
+  { label: "United States 🇺🇸", value: "United States" },
+  { label: "United Kingdom 🇬🇧", value: "United Kingdom" },
+  { label: "Canada 🇨🇦", value: "Canada" },
+  { label: "Australia 🇦🇺", value: "Australia" },
+  { label: "Germany 🇩🇪", value: "Germany" },
+  { label: "France 🇫🇷", value: "France" },
+  { label: "Italy 🇮🇹", value: "Italy" },
+  { label: "Singapore 🇸🇬", value: "Singapore" },
+  { label: "Japan 🇯🇵", value: "Japan" },
+  { label: "China 🇨🇳", value: "China" },
+  { label: "Brazil 🇧🇷", value: "Brazil" },
+  { label: "UAE 🇦🇪", value: "UAE" },
+  { label: "Saudi Arabia 🇸🇦", value: "Saudi Arabia" },
+  { label: "South Africa 🇿🇦", value: "South Africa" },
+];
+
 
 export const COMPANY_PROFILE_WIDGET_CONFIG = (symbol: string) => ({
     symbol: symbol.toUpperCase(),
