@@ -3,9 +3,13 @@
 import FooterLink from "@/components/FooterLink";
 import InputField from "@/components/forms/InputField";
 import { Button } from "@/components/ui/button";
+import { signInWithEmail } from "@/lib/actions/auth.actions";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 
 const SignIn = () => {
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -20,12 +24,17 @@ const SignIn = () => {
 
   const onSubmit = async (data: SignInFormData) => {
     try {
-      console.log(data);
+      const result = await signInWithEmail(data)
+      if (result.success) {
+        router.push("/")
+      }
     } catch (error) {
       console.error(error);
+      toast.error("Sign-In failed, please try again.",{
+        description:error instanceof Error ? error.message : "Failed to login your account"
+      })
     }
   };
-
   return (
     <div className="bg-black flex justify-center items-start py-16">
       <div className="max-w-3xl w-full mx-auto p-8 bg-[#0d0d0dcf] backdrop-blur-xl rounded-2xl border border-gray-800 shadow-[0_0_25px_rgba(255,255,0,0.15)] animate-slideUp">

@@ -4,15 +4,41 @@ import FooterLink from "@/components/FooterLink";
 import InputField from "@/components/forms/InputField";
 import SelectField from "@/components/forms/SelectField";
 import { Button } from "@/components/ui/button";
+import { signUpWithEmail } from "@/lib/actions/auth.actions";
 import {
   COUNTRIES,
   INVESTMENT_GOALS,
   PREFERRED_INDUSTRIES,
   RISK_TOLERANCE_OPTIONS,
 } from "@/lib/constants";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 
+
+/**
+ * SignUp component
+ *
+ * This component is used to sign up users to the application.
+ *
+ * It renders a form with the following fields:
+ *   - Full Name
+ *   - Email Address
+ *   - Password
+ *   - Country
+ *   - Investment Goals
+ *   - Risk Tolerance
+ *   - Preferred Industry
+ *
+ * Once the form is submitted, the component will call the signUpWithEmail action creator
+ * and pass the form data to it.
+ *
+ * The component also renders a button to submit the form and a link to sign in if the user already has an account.
+ */
 const SignUp = () => {
+
+  const router = useRouter();
+
   const {
     register,
     handleSubmit,
@@ -33,9 +59,15 @@ const SignUp = () => {
 
   const onSubmit = async (data: SignUpFormData) => {
     try {
-      console.log(data);
+      const result = await signUpWithEmail(data)
+      if (result.success) {
+        router.push("/")
+      }
     } catch (error) {
       console.error(error);
+      toast.error("Sign-UP failed, please try again.",{
+        description:error instanceof Error ? error.message : "Failed to create an account"
+      })
     }
   };
 
